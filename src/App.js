@@ -29,6 +29,7 @@ function App() {
       <Routes>
         <Route path="*" index element={<Redirect to="/employee" />} />
         <Route path="employee/:id/show" element={<EmployeeShow />} />
+        <Route path="employee/:id/edit" element={<EmployeeShow />} />
 
       </Routes>
 

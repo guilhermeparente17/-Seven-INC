@@ -9,12 +9,18 @@ const Buttons = ({params}) => {
   const dispatch = useDispatch()
   return (
       <div style={{width: '350px', display: 'flex', justifyContent: 'space-between'}}>
-            <Link to={`/employee/${params?.row?.id}/show`}><Button onClick={() => dispatch(ActionsTypes.addEmployee(params.row))} variant='contained'>Mostrar</Button></Link>
-              <Link to={`/employee/${params?.row?.id}/editar`}><Button variant='contained'>Editar</Button></Link>
-              <Link to={`/employee/${params?.row?.id}`}>
-                <Button variant='contained' color='error' startIcon={<DeleteIcon />}>
-                  Remover
-                </Button>
+            <Link to={`/employee/${params?.row?.id}/show`}><Button onClick={() => {
+              dispatch(ActionsTypes.addEmployee(params.row))
+              dispatch(ActionsTypes.addStatusPage('show'))
+            }} variant='contained'>Mostrar</Button></Link>
+            <Link to={`/employee/${params?.row?.id}/edit`}><Button onClick={() => {
+              dispatch(ActionsTypes.addEmployee(params.row))
+              dispatch(ActionsTypes.addStatusPage('edit'))
+            }} variant='contained'>Editar</Button></Link>
+            <Link to={`/employee/${params?.row?.id}`}>
+              <Button variant='contained' color='error' startIcon={<DeleteIcon />}>
+                Remover
+              </Button>
             </Link>
       </div>
   )

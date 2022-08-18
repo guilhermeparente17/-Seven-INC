@@ -79,6 +79,10 @@ export const Box = styled.div`
 export const Buttons = styled.div`
   margin-left: 50px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
 
   @media screen and (max-width: 975px){
     margin-left: 20px;

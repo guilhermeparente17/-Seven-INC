@@ -18,23 +18,23 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
 import { Button, TextField } from '@mui/material';
-import { formatarMoeda, toCurrency } from '../../../utils/formatters';
+import { formatarMoeda } from '../../../utils/formatters';
 import { mask } from 'remask';
 import useWidth from '../../../hooks/useWidth';
 import { useSelector } from 'react-redux';
 import { Selectors } from '../../../store/rootReducer';
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const EmployeeShow = () => {
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
+
   const width = useWidth();
   const employee = useSelector(Selectors.getEmployee);
+  const statusPage = useSelector(Selectors.getStatusPage);
   const [createdAt, setCreatedAt] = useState(employee?.created_at);
   const [birthDay, setBirthDay] = useState(employee?.birth_date);
-  
-  if(employee){
-    console.log(employee);
-  }
+  const navigate = useNavigate();
+
 
   const handleChangeBirthDay = (newValue) => {
     setBirthDay(newValue);
@@ -61,6 +61,16 @@ const EmployeeShow = () => {
       }
 
       alert(JSON.stringify(data, null, 2));
+      navigate("/employee", { replace: true });
+      toast.success('Funcionário criado com sucesso', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     },
   });
   return (
@@ -79,7 +89,7 @@ const EmployeeShow = () => {
                   value={formik.values.name} 
                   onChange={formik.handleChange} 
                   placeholder="Insira seu nome"
-                  disabled={true}
+                  disabled={statusPage === 'show' ? true : false}
                 />
                 <FormHelperText id="my-helper-text">Digitet seu nome completo</FormHelperText>
               </FormControl>
@@ -93,7 +103,7 @@ const EmployeeShow = () => {
                   value={formik.values.document} 
                   onChange={e => formik.setFieldValue('document', mask(e.target.value, ['999.999.999-99']))}
                   placeholder="Digite seu cpf"
-                  disabled={true}
+                  disabled={statusPage === 'show' ? true : false}
                 />
                 <FormHelperText id="my-helper-text">Digite um cpf válido</FormHelperText>
               </FormControl>
@@ -107,7 +117,7 @@ const EmployeeShow = () => {
                   value={formik.values.email} 
                   onChange={formik.handleChange} 
                   placeholder="Digite seu email"
-                  disabled={true}
+                  disabled={statusPage === 'show' ? true : false}
                 />
                 <FormHelperText id="my-helper-text">Digite um email válido</FormHelperText>
               </FormControl>
@@ -123,7 +133,7 @@ const EmployeeShow = () => {
                   value={formik.values.phone} 
                   onChange={e => formik.setFieldValue('phone', mask(e.target.value, ['(99) 9.9999-9999']))}
                   placeholder="Digite seu Telefone"
-                  disabled={true}
+                  disabled={statusPage === 'show' ? true : false}
                 />
                 <FormHelperText id="my-helper-text">Digite seu telefone válido</FormHelperText>
               </FormControl>
@@ -137,7 +147,7 @@ const EmployeeShow = () => {
                   value={formik.values.salary}
                   onChange={e => formik.setFieldValue('salary', formatarMoeda(e.target.value))}
                   placeholder="Insira um valor"
-                  disabled={true}
+                  disabled={statusPage === 'show' ? true : false}
                 />
                 <FormHelperText id="my-helper-text">Digite seu salário</FormHelperText>
               </FormControl>
@@ -150,7 +160,7 @@ const EmployeeShow = () => {
                         <DesktopDatePicker
                           label="Data de Nascimento"
                           inputFormat="dd/MM/yyyy"
-                          disabled={true}
+                          disabled={statusPage === 'show' ? true : false}
                           value={birthDay}
                           onChange={handleChangeBirthDay}
                           renderInput={(params) => <TextField {...params} />}
@@ -167,7 +177,7 @@ const EmployeeShow = () => {
                           inputFormat="dd/MM/yyyy"
                           value={createdAt}
                           onChange={handleChangeCreatedAt}
-                          disabled={true}
+                          disabled={statusPage === 'show' ? true : false}
                           renderInput={(params) => <TextField {...params} />}
                         />
                     </Stack>
@@ -176,6 +186,7 @@ const EmployeeShow = () => {
             </Grid>
           </Box>
           <Buttons>
+            <Button variant='contained' size='large' type="submit">Salvar</Button>
             <Link to="/employee"><Button variant='contained' size='large' >Voltar</Button></Link>
           </Buttons>
         </div>
