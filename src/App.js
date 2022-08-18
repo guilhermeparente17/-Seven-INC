@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect} from 'react';
+import Header from "./components/Header/Header";
+import GlobalStyle from "./GlobalStyle";
+
+import {
+  Routes,
+  Route,
+  useNavigate
+} from "react-router-dom";
+import Home from "./pages/Home/Home";
+import EmployeeShow from "./pages/Employee/EmployeeShow/EmployeeShow";
+
 
 function App() {
+
+  function Redirect({ to }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+      navigate(to);
+    });
+    return <Home />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <GlobalStyle />
+      <Header />
+
+      <Routes>
+        <Route path="*" index element={<Redirect to="/employee" />} />
+        <Route path="employee/:id/show" element={<EmployeeShow />} />
+
+      </Routes>
+
     </div>
   );
 }
