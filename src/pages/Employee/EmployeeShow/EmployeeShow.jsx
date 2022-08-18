@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { 
   EmployeeShowTitle,
@@ -10,8 +10,7 @@ import {
   Box
 } from './EmployeeShow.Elements';
 
-import { useParams, Link } from 'react-router-dom'
-import { rows } from '../../Home/rows';
+import { Link } from 'react-router-dom'
 import { FormHelperText } from '@material-ui/core';
 import Input from '../../../components/Input/Input';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -19,28 +18,23 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
 import { Button, TextField } from '@mui/material';
-import { formatarMoeda } from '../../../utils/formatters';
+import { formatarMoeda, toCurrency } from '../../../utils/formatters';
 import { mask } from 'remask';
 import useWidth from '../../../hooks/useWidth';
+import { useSelector } from 'react-redux';
+import { Selectors } from '../../../store/rootReducer';
 
 const EmployeeShow = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const [createdAt, setCreatedAt] = useState();
-  const [birthDay, setBirthDay] = useState();
-  const [employee, setEmployee] = useState(); //eslint-disable-line
   const width = useWidth();
-
-  const {id} = useParams();
-
-  useEffect(() => {
-    rows.map((value) => { //eslint-disable-line
-      if(value.id === id){
-        return setEmployee(value);
-      }
-
-    })
-  }, [id]);
+  const employee = useSelector(Selectors.getEmployee);
+  const [createdAt, setCreatedAt] = useState(employee?.created_at);
+  const [birthDay, setBirthDay] = useState(employee?.birth_date);
+  
+  if(employee){
+    console.log(employee);
+  }
 
   const handleChangeBirthDay = (newValue) => {
     setBirthDay(newValue);
@@ -52,13 +46,12 @@ const EmployeeShow = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      document: '',
-      email: '',
-      phone: '',
-      created_at: '',
-      birth_day: '',
-      salary: '',
+      name: employee.name || '',
+      document: mask(employee.document, ['999.999.999-99']) || '',
+      email: employee.email || '',
+      phone: mask(employee.phone, ['(99) 9.9999-9999']) || '',
+      created_at: createdAt || '',
+      salary: employee.salary || ''
     },
     onSubmit: values => {
       const data = {
@@ -86,6 +79,7 @@ const EmployeeShow = () => {
                   value={formik.values.name} 
                   onChange={formik.handleChange} 
                   placeholder="Insira seu nome"
+                  disabled={true}
                 />
                 <FormHelperText id="my-helper-text">Digitet seu nome completo</FormHelperText>
               </FormControl>
@@ -99,6 +93,7 @@ const EmployeeShow = () => {
                   value={formik.values.document} 
                   onChange={e => formik.setFieldValue('document', mask(e.target.value, ['999.999.999-99']))}
                   placeholder="Digite seu cpf"
+                  disabled={true}
                 />
                 <FormHelperText id="my-helper-text">Digite um cpf válido</FormHelperText>
               </FormControl>
@@ -112,6 +107,7 @@ const EmployeeShow = () => {
                   value={formik.values.email} 
                   onChange={formik.handleChange} 
                   placeholder="Digite seu email"
+                  disabled={true}
                 />
                 <FormHelperText id="my-helper-text">Digite um email válido</FormHelperText>
               </FormControl>
@@ -127,6 +123,7 @@ const EmployeeShow = () => {
                   value={formik.values.phone} 
                   onChange={e => formik.setFieldValue('phone', mask(e.target.value, ['(99) 9.9999-9999']))}
                   placeholder="Digite seu Telefone"
+                  disabled={true}
                 />
                 <FormHelperText id="my-helper-text">Digite seu telefone válido</FormHelperText>
               </FormControl>
@@ -140,6 +137,7 @@ const EmployeeShow = () => {
                   value={formik.values.salary}
                   onChange={e => formik.setFieldValue('salary', formatarMoeda(e.target.value))}
                   placeholder="Insira um valor"
+                  disabled={true}
                 />
                 <FormHelperText id="my-helper-text">Digite seu salário</FormHelperText>
               </FormControl>
@@ -152,6 +150,7 @@ const EmployeeShow = () => {
                         <DesktopDatePicker
                           label="Data de Nascimento"
                           inputFormat="dd/MM/yyyy"
+                          disabled={true}
                           value={birthDay}
                           onChange={handleChangeBirthDay}
                           renderInput={(params) => <TextField {...params} />}
@@ -168,6 +167,7 @@ const EmployeeShow = () => {
                           inputFormat="dd/MM/yyyy"
                           value={createdAt}
                           onChange={handleChangeCreatedAt}
+                          disabled={true}
                           renderInput={(params) => <TextField {...params} />}
                         />
                     </Stack>

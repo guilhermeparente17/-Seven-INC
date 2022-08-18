@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
 import dayjs from "dayjs";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom'
+import { mask } from "remask";
+import Buttons from "../../components/Buttons/Buttons";
+
 
 export const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -23,7 +23,9 @@ export const columns = [
     headerName: 'Telefone',
     type: 'number',
     width: 180,
-    editable: true
+    editable: true,
+    valueGetter: (params) =>
+      `${mask(params.row.phone, ['(99) 9.9999-9999'])}`
   },
   {
     field: 'salary',
@@ -45,14 +47,8 @@ export const columns = [
     width: 380,
     renderCell: (params) => {
       return (
-        <div style={{width: '350px', display: 'flex', justifyContent: 'space-between'}}>
-          <Link to={`/employee/${params?.row?.id}/show`}><Button variant='contained'>Mostrar</Button></Link>
-          <Link to={`/employee/${params?.row?.id}/editar`}><Button variant='contained'>Editar</Button></Link>
-          <Link to={`/employee/${params?.row?.id}`}>
-            <Button variant='contained' color='error' startIcon={<DeleteIcon />}>
-              Remover
-            </Button>
-          </Link>
+        <div>
+          <Buttons params={params} />
         </div>
       )
     }
