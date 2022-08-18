@@ -6,7 +6,7 @@ import {
 } from './Home.Elements'
 
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid'; //eslint-disable-line
+import { DataGrid } from '@mui/x-data-grid';
 import { columns } from './columns';
 import { rows } from './rows';
 

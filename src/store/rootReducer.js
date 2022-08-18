@@ -8,7 +8,7 @@ export const Actions = {
 const initialState = {
   name: '',
   statusPage: '',
-  employee: {}
+  employee: {},
 }
 
 

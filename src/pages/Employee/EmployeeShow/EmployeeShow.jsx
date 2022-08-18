@@ -27,7 +27,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 const EmployeeShow = () => {
-
   const width = useWidth();
   const employee = useSelector(Selectors.getEmployee);
   const statusPage = useSelector(Selectors.getStatusPage);
@@ -76,7 +75,7 @@ const EmployeeShow = () => {
   return (
     <Container>
       <Form onSubmit={formik.handleSubmit}>
-        <EmployeeShowTitle>Detalhes do Funcionário</EmployeeShowTitle>
+        <EmployeeShowTitle>{statusPage === 'show' ? 'Detalhes do Funcionário' : 'Editar Funcionário'}</EmployeeShowTitle>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <Box>
             <Grid>
@@ -186,7 +185,7 @@ const EmployeeShow = () => {
             </Grid>
           </Box>
           <Buttons>
-            <Button variant='contained' size='large' type="submit">Salvar</Button>
+            {statusPage === 'edit' ? <Button variant='contained' size='large' type="submit">Salvar</Button> : ''}
             <Link to="/employee"><Button variant='contained' size='large' >Voltar</Button></Link>
           </Buttons>
         </div>
