@@ -16,6 +16,19 @@ export const Container = styled(Box)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @media screen and (max-width: 500px){
+    margin-top: -100px;
+    width: 200px;
+    text-align: start;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  
+  @media screen and (max-width: 500px){
+    display: flex;
+  }
 `;
 
 export const Title = styled.h3`

@@ -45,12 +45,12 @@ const EmployeeShow = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: employee.name || '',
-      document: mask(employee.document, ['999.999.999-99']) || '',
-      email: employee.email || '',
-      phone: mask(employee.phone, ['(99) 9.9999-9999']) || '',
+      name: employee?.name || '',
+      document: mask(employee?.document, ['999.999.999-99']) || '',
+      email: employee?.email || '',
+      phone: mask(employee?.phone, ['(99) 9.9999-9999']) || '',
       created_at: createdAt || '',
-      salary: employee.salary || ''
+      salary: employee?.salary || ''
     },
     onSubmit: values => {
       const data = {
@@ -85,7 +85,7 @@ const EmployeeShow = () => {
                   wid={width >= 1500 ? '300px' : '200px'} 
                   type="text" 
                   id="name" 
-                  value={formik.values.name} 
+                  value={formik?.values?.name} 
                   onChange={formik.handleChange} 
                   placeholder="Insira seu nome"
                   disabled={statusPage === 'show' ? true : false}
@@ -99,7 +99,7 @@ const EmployeeShow = () => {
                   wid={width >= 1500 ? '300px' : '200px'} 
                   type="string" 
                   id="document" 
-                  value={formik.values.document} 
+                  value={formik?.values?.document} 
                   onChange={e => formik.setFieldValue('document', mask(e.target.value, ['999.999.999-99']))}
                   placeholder="Digite seu cpf"
                   disabled={statusPage === 'show' ? true : false}
@@ -113,7 +113,7 @@ const EmployeeShow = () => {
                   wid={width >= 1500 ? '400px' : '300px'} 
                   type="text" 
                   id="email" 
-                  value={formik.values.email} 
+                  value={formik?.values?.email} 
                   onChange={formik.handleChange} 
                   placeholder="Digite seu email"
                   disabled={statusPage === 'show' ? true : false}
@@ -129,7 +129,7 @@ const EmployeeShow = () => {
                   wid={'300px'} 
                   type="string" 
                   id="phone" 
-                  value={formik.values.phone} 
+                  value={formik?.values?.phone} 
                   onChange={e => formik.setFieldValue('phone', mask(e.target.value, ['(99) 9.9999-9999']))}
                   placeholder="Digite seu Telefone"
                   disabled={statusPage === 'show' ? true : false}
@@ -143,7 +143,7 @@ const EmployeeShow = () => {
                   wid={'300px'} 
                   type="string" 
                   id="salary" 
-                  value={formik.values.salary}
+                  value={formik?.values?.salary}
                   onChange={e => formik.setFieldValue('salary', formatarMoeda(e.target.value))}
                   placeholder="Insira um valor"
                   disabled={statusPage === 'show' ? true : false}

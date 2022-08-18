@@ -7,7 +7,8 @@ import { ActionsTypes } from '../../store/rootReducer';
 import { toast } from 'react-toastify';
 import {
   Container,
-  Title
+  Title,
+  ButtonsContainer
 } from './Buttons.Elements'
 
 const Buttons = ({params}) => {
@@ -37,7 +38,7 @@ const Buttons = ({params}) => {
             <Title id="modal-modal-title" variant="h6" component="h2">
               Você tem certeza que deseja excluir o funcionário {params.row.name} ?
             </Title>
-            <div>
+            <ButtonsContainer>
               <Button onClick={() => handleDelete()} size='large' variant='contained' color='error'>Excluir</Button>
               <Button 
                 onClick={() => setIsOpen(false)}
@@ -47,7 +48,7 @@ const Buttons = ({params}) => {
                 color='primary'>
                   Voltar
               </Button>
-            </div>
+            </ButtonsContainer>
           </Container>
         </Modal>
         <Link to={`/employee/${params?.row?.id}/show`}><Button onClick={() => {

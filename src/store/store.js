@@ -1,6 +1,16 @@
 import { createStore } from 'redux';
 import rootReducer from './rootReducer';
+import { persistStore, persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const store = createStore(rootReducer);
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-export default store;
+const persistedRed = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedRed);
+const persistor = persistStore(store);
+
+export { store, persistor};
