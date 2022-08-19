@@ -13,7 +13,7 @@ ou
 ### `yarn start`
 
 ## Créditos
-### Fiz o projeto bem básico, mais para mostrar o front pois o projeto não tem integração com api, todas as telas estão responsivas. Utilizei ReactJs, Styled-Components, Redux, Formik, Material UI, dayjs(formatar datas), remask (lib para máscaras) e alguns hooks.
+### Fiz o projeto bem básico, mais para mostrar o front pois o projeto não tem integração com api, todas as telas estão responsivas. Utilizei ReactJs, Styled-Components, Redux, Formik, Material UI, dayjs(formatar datas), remask (lib para máscaras), alguns hooks, entre outros...
 
 
 
