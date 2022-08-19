@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Projeto com Material UI e ReactJs - Seven INC
 
 ## Para rodar o projeto, basta rodar os comandos para instalar as dependências:
 
