@@ -90,7 +90,7 @@ const EmployeeShow = () => {
                   placeholder="Insira seu nome"
                   disabled={statusPage === 'show' ? true : false}
                 />
-                <FormHelperText id="my-helper-text">Digitet seu nome completo</FormHelperText>
+                {statusPage === 'edit' && <FormHelperText id="my-helper-text">Digitet seu nome completo</FormHelperText>}
               </FormControl>
 
               <FormControl marginB={'15px'}>
@@ -104,7 +104,7 @@ const EmployeeShow = () => {
                   placeholder="Digite seu cpf"
                   disabled={statusPage === 'show' ? true : false}
                 />
-                <FormHelperText id="my-helper-text">Digite um cpf válido</FormHelperText>
+                {statusPage === 'edit' && <FormHelperText id="my-helper-text">Digite um cpf válido</FormHelperText>}
               </FormControl>
 
               <FormControl marginB={'15px'}>
@@ -118,7 +118,8 @@ const EmployeeShow = () => {
                   placeholder="Digite seu email"
                   disabled={statusPage === 'show' ? true : false}
                 />
-                <FormHelperText id="my-helper-text">Digite um email válido</FormHelperText>
+                
+                {statusPage === 'edit' && <FormHelperText id="my-helper-text">Digite um email válido</FormHelperText>}
               </FormControl>
             </Grid>
 
@@ -134,7 +135,8 @@ const EmployeeShow = () => {
                   placeholder="Digite seu Telefone"
                   disabled={statusPage === 'show' ? true : false}
                 />
-                <FormHelperText id="my-helper-text">Digite seu telefone válido</FormHelperText>
+                
+                {statusPage === 'edit' && <FormHelperText id="my-helper-text">Digite seu telefone válido</FormHelperText>}
               </FormControl>
 
               <FormControl>
@@ -148,7 +150,7 @@ const EmployeeShow = () => {
                   placeholder="Insira um valor"
                   disabled={statusPage === 'show' ? true : false}
                 />
-                <FormHelperText id="my-helper-text">Digite seu salário</FormHelperText>
+                {statusPage === 'edit' && <FormHelperText id="my-helper-text">Digite seu salário</FormHelperText>}
               </FormControl>
             </Grid>
 
