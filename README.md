@@ -1,4 +1,4 @@
-# Projeto com Material UI e ReactJs - Seven INC
+# Projeto com Material UI, Formik e ReactJs - Seven INC
 
 ## Para rodar o projeto, basta rodar os comandos para instalar as dependências:
 
